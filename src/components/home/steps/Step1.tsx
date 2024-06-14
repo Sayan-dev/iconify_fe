@@ -35,7 +35,7 @@ const Step1 = ({ updateNextSteps }: StepProps) => {
                     {
                         y: [0, -20, 0],
                     },
-                    { duration: 0.2 * index, ease: "easeOut" }
+                    { duration: 0.2, ease: "easeOut", delay: 0.2 * index }
                 );
             }
         });
