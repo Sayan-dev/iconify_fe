@@ -1,36 +1,45 @@
+import { StepperContext } from "@/context/StepperContext";
 import { useAnimate } from "framer-motion";
-import React, { useEffect, useRef } from "react";
+import React, { useContext, useEffect, useRef } from "react";
+import Step1 from "./steps/Step1";
+import Step2 from "./steps/Step2";
+import Step3 from "./steps/Step3";
+import Step0 from "./steps/Step0";
+import IconInfoProvider from "@/context/IconInfo";
 
 const LandingRoot = () => {
-    
+    const { steps, updateNextSteps, updatePrevious } =
+        useContext(StepperContext);
 
-    const ref = useRef<HTMLDivElement>(null);
-    const [, animate] = useAnimate();
+    const StepComponent = () => {
+        switch (steps) {
+            case 0:
+                return <Step0 updateNextSteps={updateNextSteps} />;
+            case 1:
+                return <Step1 updateNextSteps={updateNextSteps} />;
+            case 2:
+                return (
+                    <Step2
+                        updatePrevious={updatePrevious}
+                        updateNextSteps={updateNextSteps}
+                    />
+                );
 
-    useEffect(() => {
-        if (ref.current) {
-            animate(
-                ref.current,
-                {
-                    opacity: [0, 1],
-                    x: [60, 0],
-                },
-                { duration: 0.8, ease: "easeInOut" }
-            );
+            case 3:
+                return (
+                    <Step3
+                        updatePrevious={updatePrevious}
+                        updateNextSteps={updateNextSteps}
+                    />
+                );
         }
-    }, []);
+    };
+
     return (
-        <div className="flex justify-center items-center h-full flex-col">
-            <div className="text-6xl mb-5">Iconify</div>
-            <div ref={ref} className="text-2xl my-5">
-                One stop solution for your perfect logo
-            </div>
-            <button
-                type="button"
-                className="border-[1px] px-10 py-5 rounded-full mt-5 text-lg font-medium focus:ring-1 focus:border-2 hover:ring-1 hover:border-2"
-            >
-                Continue
-            </button>
+        <div className="flex justify-center items-center min-h-full flex-col">
+            <IconInfoProvider>
+                <StepComponent />
+            </IconInfoProvider>
         </div>
     );
 };
