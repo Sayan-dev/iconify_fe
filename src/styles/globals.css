@@ -1,0 +1,23 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+
+@layer base {
+    :root {
+      --white: #fff;
+      --black: #000;
+      --light: #ECECEC;
+      --faded: #ffffff80;
+      --dark-line: #111;
+      --dark-grey: #646464;
+      --dark-grey-2: #191919;
+      --faded-dark: #646464;
+      --light-grey: #f7f7f7;
+      --background-light: #efefef;
+      --background-dark: #050505;
+      --primary: #fff;
+      --accent: #f7f7f7;
+    }
+  }
